@@ -1,0 +1,237 @@
+@import url("https://fonts.googleapis.com/css2?family=Jost");
+
+* {
+	padding: 0;
+	margin: 0;
+	border: none;
+	outline: none;
+	list-style: none;
+	text-decoration: none;
+	box-sizing: border-box;
+	font-family: "Jost", sans-serif;
+}
+
+img {
+	object-fit: cover;
+}
+
+body {
+	--bg: hsl(31, 97.2%, 72.4%);
+	--white: rgba(255, 255, 255, 1);
+	--black: rgba(0, 0, 0, 1);
+	--orange: hsl(21, 90.2%, 48.2%);
+	min-height: 100svh;
+	display: flex;
+	justify-content: center;
+	align-items: start;
+	background: var(--bg);
+	padding: 20px 0;
+}
+
+.container {
+	width: 94%;
+	max-width: 840px;
+	background: var(--white);
+	padding: 20px;
+	border-radius: 6px;
+	display: flex;
+	justify-content: start;
+	align-items: start;
+	flex-direction: column;
+	gap: 24px;
+}
+
+.container h1 {
+	font-weight: 600;
+	font-size: 1.2em;
+}
+
+.editor-container {
+	display: flex;
+	justify-content: start;
+	align-items: stretch;
+	flex-direction: column;
+	gap: 24px;
+	height: 100%;
+}
+
+.image-container {
+	height: 100%;
+}
+
+.image-container img {
+	width: 100%;
+	height: 100%;
+	border-radius: 6px;
+}
+
+.editor-controls {
+	border: 1px solid var(--black);
+	padding: 16px;
+	border-radius: 6px;
+	width: 100%;
+	height: 100%;
+}
+
+.editor-controls strong {
+	font-size: 1.1em;
+}
+
+.editor-controls .filter-buttons {
+	display: grid;
+	grid-template-columns: repeat(2, 1fr);
+	gap: 12px;
+	margin-top: 12px;
+}
+
+.editor-controls
+	.filter-buttons
+	button {
+	background: transparent;
+	border: 1px solid var(--black);
+	padding: 10px;
+	border-radius: 3px;
+	font-size: 1.1em;
+}
+
+.filter-sliders .filter-values {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	gap: 20px;
+	padding: 12px 0;
+}
+
+.filter-sliders input {
+	display: block;
+	width: 100%;
+	height: 5px;
+	outline: none;
+	accent-color: var(--orange);
+}
+
+.rotate strong {
+	display: block;
+	font-size: 1.2em;
+	padding-top: 12px;
+}
+
+.rot-buttons {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	flex-direction: row;
+	gap: 12px;
+	margin-top: 12px;
+}
+
+.rot-buttons button {
+	padding: 14px 18px;
+	border-radius: 4px;
+	background: var(--white);
+	border: 1px solid var(--black);
+	font-size: 1.2em;
+}
+
+.buttons {
+	display: flex;
+	justify-content: start;
+	align-items: center;
+	flex-direction: column;
+	gap: 20px;
+	width: 100%;
+}
+
+.buttons > button {
+	width: 100%;
+	border: 1px solid var(--black);
+	background: var(--white);
+	border-radius: 4px;
+	font-size: 1.1em;
+	text-transform: uppercase;
+	color: var(--black);
+	display: block;
+	padding: 12px 24px;
+	text-align: center;
+}
+
+.buttons .second-buttons {
+	display: flex;
+	justify-content: start;
+	align-items: center;
+	flex-direction: column;
+	gap: 20px;
+	width: 100%;
+}
+
+.buttons .second-buttons label {
+	width: 100%;
+	border: 1px solid var(--black);
+	background: var(--black);
+	border-radius: 4px;
+	font-size: 1.1em;
+	text-transform: uppercase;
+	color: var(--white);
+	display: block;
+	padding: 12px 24px;
+	text-align: center;
+}
+
+.buttons .second-buttons button {
+	width: 100%;
+	border: 1px solid var(--orange);
+	background: var(--orange);
+	border-radius: 4px;
+	font-size: 1.1em;
+	text-transform: uppercase;
+	color: var(--white);
+	display: block;
+	padding: 12px 24px;
+	text-align: center;
+}
+
+@media screen and (min-width: 1024px) {
+	body {
+		align-items: center;
+	}
+
+	.container {
+		padding: 36px;
+		border-radius: 16px;
+	}
+
+	.editor-container {
+		display: grid;
+		grid-template-columns: 1fr 3fr;
+		gap: 20px;
+	}
+
+	.editor-controls {
+		width: 100%;
+		order: 1;
+	}
+
+	.image-container {
+		order: 2;
+	}
+
+	.buttons {
+		justify-content: space-between;
+		flex-direction: row;
+	}
+
+	.buttons > button {
+		width: auto;
+	}
+
+	.buttons .second-buttons {
+		justify-content: end;
+		flex-direction: row;
+		width: auto;
+	}
+
+	.buttons .second-buttons label,
+	.buttons .second-buttons button {
+		width: auto;
+	}
+}

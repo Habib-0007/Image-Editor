@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta
+			name="viewport"
+			content="width=device-width, initial-scale=1.0"
+		/>
+		<link
+			rel="stylesheet"
+			href="css/index.css"
+		/>
+		<link
+			rel="stylesheet"
+			href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+		/>
+		<link
+			rel="stylesheet"
+			href="https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css"
+		/>
+		<title>Image Editor</title>
+	</head>
+	<body>
+		<section class="container">
+			<h1>Habib Image Editor</h1>
+			<section class="editor-container">
+				<section
+					class="image-container"
+				>
+					<img
+						src="./img/img.jpg"
+						alt="Image to be edited"
+					/>
+				</section>
+				<section
+					class="editor-controls"
+				>
+					<section class="filters">
+						<strong>Filters</strong>
+						<div class="filter-buttons">
+							<button
+								>Brightness</button
+							>
+							<button
+								>Saturation</button
+							>
+							<button>Inversion</button>
+							<button>Grayscale</button>
+						</div>
+						<div class="filter-sliders">
+							<div
+								class="filter-values"
+							>
+								<p>Brightness</p>
+								<p>100%</p>
+							</div>
+							<input
+								type="range"
+								value="100"
+								min="0"
+								max="200"
+							/>
+						</div>
+						<div class="rotate">
+							<strong
+								>Rotate &amp;
+								Flip</strong
+							>
+							<div class="rot-buttons">
+								<button
+									class="fa fa-rotate-left"
+								></button>
+								<button
+									class="fa fa-rotate-right"
+								></button>
+								<button
+									class="bx bx-reflect-vertical"
+								></button>
+								<button
+									class="bx bx-reflect-horizontal"
+								></button>
+							</div>
+						</div>
+					</section>
+				</section>
+			</section>
+			<section class="buttons">
+				<button>RESET FILTERS</button>
+				<div class="second-buttons">
+					<label for="image"
+						>CHOOSE IMAGE</label
+					>
+					<input
+						name="image"
+						type="file"
+						accept=".jpg, .png, .jpeg"
+						style="display: none"
+					/>
+					<button>SAVE MESSAGE</button>
+				</div>
+			</section>
+		</section>
+		<script src="js/index.js"></script>
+	</body>
+</html>
