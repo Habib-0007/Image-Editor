@@ -94,20 +94,36 @@ body {
 	font-size: 1.1em;
 }
 
+.editor-controls
+	.filter-buttons
+	button.active {
+	border: 1px solid var(--orange);
+	background: var(--orange);
+	color: var(--white);
+}
+
 .filter-sliders .filter-values {
-	display: flex;
+	display: none;
 	justify-content: space-between;
 	align-items: center;
 	gap: 20px;
 	padding: 12px 0;
 }
 
-.filter-sliders input {
-	display: block;
+.filter-sliders .filter-values.show {
+	display: flex;
+}
+
+.filter-sliders .all-ranges input {
+	display: none;
 	width: 100%;
 	height: 5px;
 	outline: none;
 	accent-color: var(--orange);
+}
+
+.filter-sliders .all-ranges input.show {
+	display: block;
 }
 
 .rotate strong {

@@ -30,6 +30,7 @@
 					<img
 						src="./img/img.jpg"
 						alt="Image to be edited"
+						id="image"
 					/>
 				</section>
 				<section
@@ -39,27 +40,90 @@
 						<strong>Filters</strong>
 						<div class="filter-buttons">
 							<button
+								class="active brightness button"
+								id="button1"
+								type="button"
 								>Brightness</button
 							>
 							<button
+								class="saturation button"
+								id="button2"
+								type="buttom"
 								>Saturation</button
 							>
-							<button>Inversion</button>
-							<button>Grayscale</button>
+							<button
+								class="inversion button"
+								id="button3"
+								type="button"
+								>Inversion</button
+							>
+							<button
+								class="grayscale button"
+								id="button4"
+								type="button"
+								>Grayscale</button
+							>
 						</div>
 						<div class="filter-sliders">
 							<div
-								class="filter-values"
+								class="filter-values show"
+								id="filter1"
 							>
 								<p>Brightness</p>
-								<p>100%</p>
+								<p id="bri-val">100%</p>
 							</div>
-							<input
-								type="range"
-								value="100"
-								min="0"
-								max="200"
-							/>
+							<div
+								class="filter-values"
+								id="filter2"
+							>
+								<p>Saturation</p>
+								<p id="sat-val">100%</p>
+							</div>
+							<div
+								class="filter-values"
+								id="filter3"
+							>
+								<p>Inversion</p>
+								<p id="inv-val">0%</p>
+							</div>
+							<div
+								class="filter-values"
+								id="filter4"
+							>
+								<p>Grayscale</p>
+								<p id="gra-val">0%</p>
+							</div>
+							<div class="all-ranges">
+								<input
+									type="range"
+									value="100"
+									min="0"
+									max="200"
+									class="show"
+									id="input1"
+								/>
+								<input
+									type="range"
+									value="100"
+									min="0"
+									max="200"
+									id="input2"
+								/>
+								<input
+									type="range"
+									value="0"
+									min="0"
+									max="100"
+									id="input3"
+								/>
+								<input
+									type="range"
+									value="0"
+									min="0"
+									max="100"
+									id="input4"
+								/>
+							</div>
 						</div>
 						<div class="rotate">
 							<strong
