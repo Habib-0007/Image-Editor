@@ -133,15 +133,19 @@
 							<div class="rot-buttons">
 								<button
 									class="fa fa-rotate-left"
+									id="rotate-left"
 								></button>
 								<button
 									class="fa fa-rotate-right"
+									id="rotate-right"
 								></button>
 								<button
 									class="bx bx-reflect-vertical"
+									id="flip-vertical"
 								></button>
 								<button
 									class="bx bx-reflect-horizontal"
+									id="flip-horizontal"
 								></button>
 							</div>
 						</div>
@@ -149,18 +153,23 @@
 				</section>
 			</section>
 			<section class="buttons">
-				<button>RESET FILTERS</button>
+				<button id="reset-button"
+					>RESET FILTERS</button
+				>
 				<div class="second-buttons">
-					<label for="image"
+					<label for="image-upload"
 						>CHOOSE IMAGE</label
 					>
 					<input
 						name="image"
+						id="image-upload"
 						type="file"
 						accept=".jpg, .png, .jpeg"
 						style="display: none"
 					/>
-					<button>SAVE MESSAGE</button>
+					<button id="download-button"
+						>SAVE MESSAGE</button
+					>
 				</div>
 			</section>
 		</section>
