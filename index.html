@@ -176,5 +176,66 @@
 			</section>
 		</section>
 		<script src="js/index.js"></script>
+		<script>
+			const imageContainer =
+				document.getElementById(
+					"image-container"
+				);
+
+			imageContainer.style.height = `${imageContainer.clientWidth}px`;
+			
+			window.addEventListener('resize', () => {
+			imageContainer.style.height = `${imageContainer.clientWidth}px`;
+				
+			});
+
+			document
+				.getElementById(
+					"download-button"
+				)
+				.addEventListener(
+					"click",
+					() => {
+						const imageContainer =
+							document.getElementById(
+								"image-container"
+							);
+
+						if (!imageContainer) return;
+
+						html2canvas(imageContainer)
+							.then(canvas => {
+								let imageId = "";
+								for (
+									let i = 0;
+									i < 6;
+									i++
+								) {
+									imageId += Math.floor(
+										Math.random() * 10
+									).toString();
+								}
+
+								const link =
+									document.createElement(
+										"a"
+									);
+								link.href =
+									canvas.toDataURL(
+										"image/png"
+									);
+								link.download = `filtered-image-${imageId}.png`;
+
+								link.click();
+							})
+							.catch(error => {
+								console.error(
+									"Error capturing the image:",
+									error
+								);
+							});
+					}
+				);
+		</script>
 	</body>
 </html>

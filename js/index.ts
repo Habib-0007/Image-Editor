@@ -1,8 +1,5 @@
-import html2canvas from 'html2canvas';
-
 const filterButtonsContainer = document.querySelector<HTMLDivElement>(".filter-buttons")!;
 const filterButtons = filterButtonsContainer.querySelectorAll<HTMLButtonElement>("button");
-const imageContainer = document.querySelector<HTMLElement>("image-container")!;
 const image = document.querySelector<HTMLImageElement>("img")!;
 const allRanges = document.querySelectorAll<HTMLInputElement>(".all-ranges input");
 const filterValues = document.querySelectorAll<HTMLElement>(".filter-values");
@@ -14,7 +11,6 @@ let grayscaleValue: number = 0;
 let rotationValue: number = 0;
 let flipHorizontal: boolean = false;
 let flipVertical: boolean = false;
-imageContainer.style.height = imageContainer.style.width;
 
 function filterImage(): void {
 	const filterString = `brightness(${brightnessValue}%) saturate(${saturationValue}%) invert(${inversionValue}%) grayscale(${grayscaleValue}%)`;
@@ -145,23 +141,4 @@ if (imageUploadInput) {
 	});
 }
 
-document.getElementById('download-button')!.addEventListener('click', () => {
-	const imageContainer = document.getElementById('image-container');
 
-	if (!imageContainer) return;
-
-	html2canvas(imageContainer).then(canvas => {
-		let imageId = "";
-		for (let i = 0; i < 6; i++) {
-			imageId += (Math.floor(Math.random() * 10)).toString();
-		}
-
-		const link: HTMLAnchorElement | null = document.createElement('a');
-		link.href = canvas.toDataURL('image/png');
-		link.download = `filtered-image-${imageId}.png`;
-
-		link.click();
-	}).catch(error => {
-		console.error("Error capturing the image:", error);
-	});
-});
