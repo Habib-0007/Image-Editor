@@ -147,8 +147,8 @@ document.getElementById('download-button')!.addEventListener('click', () => {
 	const ctx: CanvasRenderingContext2D | null = canvas?.getContext('2d');
 	if (!ctx || !canvas) return;
 
-	canvas.width = imageContainer.clientWidth;
-	canvas.height = imageContainer.clientHeight;
+	canvas.width = imageContainer.offsetWidth;
+	canvas.height = imageContainer.offsetHeight;
 	ctx.filter =
 		`brightness(${brightnessValue}%) saturate(${saturationValue}%) invert(${inversionValue}%) grayscale(${grayscaleValue}%)`;
 
