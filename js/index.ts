@@ -1,5 +1,8 @@
+import html2canvas from 'html2canvas';
+
 const filterButtonsContainer = document.querySelector<HTMLDivElement>(".filter-buttons")!;
 const filterButtons = filterButtonsContainer.querySelectorAll<HTMLButtonElement>("button");
+const imageContainer = document.querySelector<HTMLElement>("image-container")!;
 const image = document.querySelector<HTMLImageElement>("img")!;
 const allRanges = document.querySelectorAll<HTMLInputElement>(".all-ranges input");
 const filterValues = document.querySelectorAll<HTMLElement>(".filter-values");
@@ -11,6 +14,7 @@ let grayscaleValue: number = 0;
 let rotationValue: number = 0;
 let flipHorizontal: boolean = false;
 let flipVertical: boolean = false;
+imageContainer.style.height = imageContainer.style.width;
 
 function filterImage(): void {
 	const filterString = `brightness(${brightnessValue}%) saturate(${saturationValue}%) invert(${inversionValue}%) grayscale(${grayscaleValue}%)`;
@@ -142,33 +146,22 @@ if (imageUploadInput) {
 }
 
 document.getElementById('download-button')!.addEventListener('click', () => {
-	const canvas: HTMLCanvasElement | null = document.createElement('canvas');
-	const ctx: CanvasRenderingContext2D | null = canvas?.getContext('2d');
+	const imageContainer = document.getElementById('image-container');
 
-	if (!ctx || !canvas) return;
+	if (!imageContainer) return;
 
-	canvas.width = image.width;
-	canvas.height = image.height;
+	html2canvas(imageContainer).then(canvas => {
+		let imageId = "";
+		for (let i = 0; i < 6; i++) {
+			imageId += (Math.floor(Math.random() * 10)).toString();
+		}
 
-	ctx.filter =
-		`brightness(${brightnessValue}%) saturate(${saturationValue}%) invert(${inversionValue}%) grayscale(${grayscaleValue}%)`;
-	ctx.translate(canvas.width / 2, canvas.height / 2);
+		const link: HTMLAnchorElement | null = document.createElement('a');
+		link.href = canvas.toDataURL('image/png');
+		link.download = `filtered-image-${imageId}.png`;
 
-	ctx.rotate((rotationValue * Math.PI) / 180);
-
-	if (flipHorizontal) ctx.scale(-1, 1);
-	if (flipVertical) ctx.scale(1, -1);
-
-	ctx.drawImage(image, -canvas.width / 2, -canvas.height / 2);
-
-	let imageId = ""
-	for (var i = 0; i < 6; i++) {
-		imageId += (Math.floor(Math.random()) + 1).toString()
-	}
-
-	const link: HTMLAnchorElement | null = document.createElement('a');
-	link.href = canvas.toDataURL();
-	link.download = `filtered-image-${imageId}.png`;
-
-	link.click();
+		link.click();
+	}).catch(error => {
+		console.error("Error capturing the image:", error);
+	});
 });

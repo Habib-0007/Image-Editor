@@ -1,19 +1,27 @@
-var filterButtonsContainer = document.querySelector(".filter-buttons");
-var filterButtons = filterButtonsContainer.querySelectorAll("button");
-var image = document.querySelector("img");
-var allRanges = document.querySelectorAll(".all-ranges input");
-var filterValues = document.querySelectorAll(".filter-values");
-var brightnessValue = 100;
-var saturationValue = 100;
-var inversionValue = 0;
-var grayscaleValue = 0;
-var rotationValue = 0;
-var flipHorizontal = false;
-var flipVertical = false;
+"use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const html2canvas_1 = __importDefault(require("html2canvas"));
+const filterButtonsContainer = document.querySelector(".filter-buttons");
+const filterButtons = filterButtonsContainer.querySelectorAll("button");
+const imageContainer = document.querySelector("image-container");
+const image = document.querySelector("img");
+const allRanges = document.querySelectorAll(".all-ranges input");
+const filterValues = document.querySelectorAll(".filter-values");
+let brightnessValue = 100;
+let saturationValue = 100;
+let inversionValue = 0;
+let grayscaleValue = 0;
+let rotationValue = 0;
+let flipHorizontal = false;
+let flipVertical = false;
+imageContainer.style.height = imageContainer.style.width;
 function filterImage() {
-    var filterString = "brightness(".concat(brightnessValue, "%) saturate(").concat(saturationValue, "%) invert(").concat(inversionValue, "%) grayscale(").concat(grayscaleValue, "%)");
+    const filterString = `brightness(${brightnessValue}%) saturate(${saturationValue}%) invert(${inversionValue}%) grayscale(${grayscaleValue}%)`;
     image.style.filter = filterString;
-    var transformString = "rotate(".concat(rotationValue, "deg)");
+    let transformString = `rotate(${rotationValue}deg)`;
     if (flipHorizontal) {
         transformString += ' scaleX(-1)';
     }
@@ -23,7 +31,7 @@ function filterImage() {
     image.style.transform = transformString;
 }
 function updateRangeValue(range, displayElement) {
-    displayElement.textContent = "".concat(range.value, "%");
+    displayElement.textContent = `${range.value}%`;
 }
 function resetFilters() {
     brightnessValue = 100;
@@ -44,99 +52,91 @@ function resetFilters() {
     image.style.filter = "none";
     image.style.transform = "none";
 }
-filterButtonsContainer.addEventListener("click", function (event) {
+filterButtonsContainer.addEventListener("click", (event) => {
     var _a;
-    var targetButton = event.target;
-    var buttonId = (_a = targetButton.closest(".button")) === null || _a === void 0 ? void 0 : _a.id;
+    const targetButton = event.target;
+    const buttonId = (_a = targetButton.closest(".button")) === null || _a === void 0 ? void 0 : _a.id;
     if (buttonId) {
-        var range = document.querySelector("#input".concat(buttonId.slice(-1)));
-        var filterValue = document.querySelector("#filter".concat(buttonId.slice(-1)));
-        filterButtons.forEach(function (button) { return button.classList.remove("active"); });
-        filterValues.forEach(function (value) { return value.classList.remove("show"); });
-        allRanges.forEach(function (range) { return range.classList.remove("show"); });
+        const range = document.querySelector(`#input${buttonId.slice(-1)}`);
+        const filterValue = document.querySelector(`#filter${buttonId.slice(-1)}`);
+        filterButtons.forEach(button => button.classList.remove("active"));
+        filterValues.forEach(value => value.classList.remove("show"));
+        allRanges.forEach(range => range.classList.remove("show"));
         targetButton.classList.add("active");
         range.classList.add("show");
         filterValue.classList.add("show");
     }
 });
-document.querySelector("#input1").addEventListener("input", function (event) {
-    var brightnessRange = event.target;
+document.querySelector("#input1").addEventListener("input", (event) => {
+    const brightnessRange = event.target;
     brightnessValue = parseInt(brightnessRange.value);
     updateRangeValue(brightnessRange, document.querySelector("#bri-val"));
     filterImage();
 });
-document.querySelector("#input2").addEventListener("input", function (event) {
-    var saturationRange = event.target;
+document.querySelector("#input2").addEventListener("input", (event) => {
+    const saturationRange = event.target;
     saturationValue = parseInt(saturationRange.value);
     updateRangeValue(saturationRange, document.querySelector("#sat-val"));
     filterImage();
 });
-document.querySelector("#input3").addEventListener("input", function (event) {
-    var inversionRange = event.target;
+document.querySelector("#input3").addEventListener("input", (event) => {
+    const inversionRange = event.target;
     inversionValue = parseInt(inversionRange.value);
     updateRangeValue(inversionRange, document.querySelector("#inv-val"));
     filterImage();
 });
-document.querySelector("#input4").addEventListener("input", function (event) {
-    var grayscaleRange = event.target;
+document.querySelector("#input4").addEventListener("input", (event) => {
+    const grayscaleRange = event.target;
     grayscaleValue = parseInt(grayscaleRange.value);
     updateRangeValue(grayscaleRange, document.querySelector("#gra-val"));
     filterImage();
 });
 document.getElementById("reset-button").addEventListener("click", resetFilters);
-document.getElementById("rotate-left").addEventListener("click", function () {
+document.getElementById("rotate-left").addEventListener("click", () => {
     rotationValue -= 90;
     filterImage();
 });
-document.getElementById("rotate-right").addEventListener("click", function () {
+document.getElementById("rotate-right").addEventListener("click", () => {
     rotationValue += 90;
     filterImage();
 });
-document.getElementById("flip-horizontal").addEventListener("click", function () {
+document.getElementById("flip-horizontal").addEventListener("click", () => {
     flipHorizontal = !flipHorizontal;
     filterImage();
 });
-document.getElementById("flip-vertical").addEventListener("click", function () {
+document.getElementById("flip-vertical").addEventListener("click", () => {
     flipVertical = !flipVertical;
     filterImage();
 });
-var imageUploadInput = document.getElementById('image-upload');
+const imageUploadInput = document.getElementById('image-upload');
 if (imageUploadInput) {
-    imageUploadInput.addEventListener('change', function (event) {
-        var fileList = event.target.files;
+    imageUploadInput.addEventListener('change', (event) => {
+        const fileList = event.target.files;
         if (fileList && fileList.length > 0) {
-            var file = fileList[0];
-            var reader_1 = new FileReader();
-            reader_1.onloadend = function () {
-                image.src = reader_1.result;
+            const file = fileList[0];
+            const reader = new FileReader();
+            reader.onloadend = () => {
+                image.src = reader.result;
                 resetFilters();
             };
-            reader_1.readAsDataURL(file);
+            reader.readAsDataURL(file);
         }
     });
 }
-document.getElementById('download-button').addEventListener('click', function () {
-    var canvas = document.createElement('canvas');
-    var ctx = canvas === null || canvas === void 0 ? void 0 : canvas.getContext('2d');
-    if (!ctx || !canvas)
+document.getElementById('download-button').addEventListener('click', () => {
+    const imageContainer = document.getElementById('image-container');
+    if (!imageContainer)
         return;
-    canvas.width = image.width;
-    canvas.height = image.height;
-    ctx.filter =
-        "brightness(".concat(brightnessValue, "%) saturate(").concat(saturationValue, "%) invert(").concat(inversionValue, "%) grayscale(").concat(grayscaleValue, "%)");
-    ctx.translate(canvas.width / 2, canvas.height / 2);
-    ctx.rotate((rotationValue * Math.PI) / 180);
-    if (flipHorizontal)
-        ctx.scale(-1, 1);
-    if (flipVertical)
-        ctx.scale(1, -1);
-    ctx.drawImage(image, -canvas.width / 2, -canvas.height / 2);
-    var imageId = "";
-    for (var i = 0; i < 6; i++) {
-        imageId += (Math.floor(Math.random()) + 1).toString();
-    }
-    var link = document.createElement('a');
-    link.href = canvas.toDataURL();
-    link.download = "filtered-image-".concat(imageId, ".png");
-    link.click();
+    (0, html2canvas_1.default)(imageContainer).then(canvas => {
+        let imageId = "";
+        for (let i = 0; i < 6; i++) {
+            imageId += (Math.floor(Math.random() * 10)).toString();
+        }
+        const link = document.createElement('a');
+        link.href = canvas.toDataURL('image/png');
+        link.download = `filtered-image-${imageId}.png`;
+        link.click();
+    }).catch(error => {
+        console.error("Error capturing the image:", error);
+    });
 });
