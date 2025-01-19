@@ -10,7 +10,6 @@
 			rel="stylesheet"
 			href="css/index.css"
 		/>
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 		<link
 			rel="stylesheet"
 			href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
@@ -183,59 +182,13 @@
 				);
 
 			imageContainer.style.height = `${imageContainer.clientWidth}px`;
-			
-			window.addEventListener('resize', () => {
-			imageContainer.style.height = `${imageContainer.clientWidth}px`;
-				
-			});
 
-			document
-				.getElementById(
-					"download-button"
-				)
-				.addEventListener(
-					"click",
-					() => {
-						const imageContainer =
-							document.getElementById(
-								"image-container"
-							);
-
-						if (!imageContainer) return;
-
-						html2canvas(imageContainer)
-							.then(canvas => {
-								let imageId = "";
-								for (
-									let i = 0;
-									i < 6;
-									i++
-								) {
-									imageId += Math.floor(
-										Math.random() * 10
-									).toString();
-								}
-
-								const link =
-									document.createElement(
-										"a"
-									);
-								link.href =
-									canvas.toDataURL(
-										"image/png"
-									);
-								link.download = `filtered-image-${imageId}.png`;
-
-								link.click();
-							})
-							.catch(error => {
-								console.error(
-									"Error capturing the image:",
-									error
-								);
-							});
-					}
-				);
+			window.addEventListener(
+				"resize",
+				() => {
+					imageContainer.style.height = `${imageContainer.clientWidth}px`;
+				}
+			);
 		</script>
 	</body>
 </html>

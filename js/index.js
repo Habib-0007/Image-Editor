@@ -1,5 +1,6 @@
 var filterButtonsContainer = document.querySelector(".filter-buttons");
 var filterButtons = filterButtonsContainer.querySelectorAll("button");
+var imageContainer = document.querySelector("image-container");
 var image = document.querySelector("img");
 var allRanges = document.querySelectorAll(".all-ranges input");
 var filterValues = document.querySelectorAll(".filter-values");
@@ -115,3 +116,28 @@ if (imageUploadInput) {
         }
     });
 }
+document.getElementById('download-button').addEventListener('click', function () {
+    var canvas = document.createElement('canvas');
+    var ctx = canvas === null || canvas === void 0 ? void 0 : canvas.getContext('2d');
+    if (!ctx || !canvas)
+        return;
+    canvas.width = imageContainer.clientWidth;
+    canvas.height = imageContainer.clientHeight;
+    ctx.filter =
+        "brightness(".concat(brightnessValue, "%) saturate(").concat(saturationValue, "%) invert(").concat(inversionValue, "%) grayscale(").concat(grayscaleValue, "%)");
+    ctx.translate(canvas.width / 2, canvas.height / 2);
+    ctx.rotate((rotationValue * Math.PI) / 180);
+    if (flipHorizontal)
+        ctx.scale(-1, 1);
+    if (flipVertical)
+        ctx.scale(1, -1);
+    ctx.drawImage(image, -canvas.width / 2, -canvas.height / 2);
+    var imageId = "";
+    for (var i = 0; i < 6; i++) {
+        imageId += (Math.floor(Math.random() * 10)).toString();
+    }
+    var link = document.createElement('a');
+    link.href = canvas.toDataURL();
+    link.download = "filtered-image-".concat(imageId, ".png");
+    link.click();
+});

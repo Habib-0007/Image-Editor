@@ -1,5 +1,6 @@
 const filterButtonsContainer = document.querySelector<HTMLDivElement>(".filter-buttons")!;
 const filterButtons = filterButtonsContainer.querySelectorAll<HTMLButtonElement>("button");
+const imageContainer = document.querySelector<HTMLElement>("image-container");
 const image = document.querySelector<HTMLImageElement>("img")!;
 const allRanges = document.querySelectorAll<HTMLInputElement>(".all-ranges input");
 const filterValues = document.querySelectorAll<HTMLElement>(".filter-values");
@@ -141,4 +142,29 @@ if (imageUploadInput) {
 	});
 }
 
+document.getElementById('download-button')!.addEventListener('click', () => {
+	const canvas: HTMLCanvasElement | null = document.createElement('canvas');
+	const ctx: CanvasRenderingContext2D | null = canvas?.getContext('2d');
+	if (!ctx || !canvas) return;
 
+	canvas.width = imageContainer.clientWidth;
+	canvas.height = imageContainer.clientHeight;
+	ctx.filter =
+		`brightness(${brightnessValue}%) saturate(${saturationValue}%) invert(${inversionValue}%) grayscale(${grayscaleValue}%)`;
+
+	ctx.translate(canvas.width / 2, canvas.height / 2);
+	ctx.rotate((rotationValue * Math.PI) / 180);
+	if (flipHorizontal) ctx.scale(-1, 1);
+	if (flipVertical) ctx.scale(1, -1);
+	ctx.drawImage(image, -canvas.width / 2, -canvas.height / 2);
+
+	let imageId = ""
+	for (var i = 0; i < 6; i++) {
+		imageId += (Math.floor(Math.random() * 10)).toString()
+	}
+
+	const link: HTMLAnchorElement | null = document.createElement('a');
+	link.href = canvas.toDataURL();
+	link.download = `filtered-image-${imageId}.png`;
+	link.click();
+});
