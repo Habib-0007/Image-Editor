@@ -121,8 +121,8 @@ document.getElementById('download-button').addEventListener('click', function ()
     var ctx = canvas === null || canvas === void 0 ? void 0 : canvas.getContext('2d');
     if (!ctx || !canvas)
         return;
-    canvas.width = imageContainer.offsetWidth;
-    canvas.height = imageContainer.offsetHeight;
+    canvas.width = image.width;
+    canvas.height = image.height;
     ctx.filter =
         "brightness(".concat(brightnessValue, "%) saturate(").concat(saturationValue, "%) invert(").concat(inversionValue, "%) grayscale(").concat(grayscaleValue, "%)");
     ctx.translate(canvas.width / 2, canvas.height / 2);
