@@ -1,6 +1,5 @@
 var filterButtonsContainer = document.querySelector(".filter-buttons");
 var filterButtons = filterButtonsContainer.querySelectorAll("button");
-var imageContainer = document.querySelector("image-container");
 var image = document.querySelector("img");
 var allRanges = document.querySelectorAll(".all-ranges input");
 var filterValues = document.querySelectorAll(".filter-values");
@@ -117,12 +116,15 @@ if (imageUploadInput) {
     });
 }
 document.getElementById('download-button').addEventListener('click', function () {
+    var imageContainer = document.getElementById('image-container');
+    var containerWidth = imageContainer.clientWidth;
+    var containerHeight = imageContainer.clientHeight;
     var canvas = document.createElement('canvas');
     var ctx = canvas === null || canvas === void 0 ? void 0 : canvas.getContext('2d');
     if (!ctx || !canvas)
         return;
-    canvas.width = image.width;
-    canvas.height = image.height;
+    canvas.width = containerWidth;
+    canvas.height = containerHeight;
     ctx.filter =
         "brightness(".concat(brightnessValue, "%) saturate(").concat(saturationValue, "%) invert(").concat(inversionValue, "%) grayscale(").concat(grayscaleValue, "%)");
     ctx.translate(canvas.width / 2, canvas.height / 2);
@@ -131,10 +133,10 @@ document.getElementById('download-button').addEventListener('click', function ()
         ctx.scale(-1, 1);
     if (flipVertical)
         ctx.scale(1, -1);
-    ctx.drawImage(image, -canvas.width / 2, -canvas.height / 2);
+    ctx.drawImage(image, -containerWidth / 2, -containerHeight / 2);
     var imageId = "";
     for (var i = 0; i < 6; i++) {
-        imageId += (Math.floor(Math.random() * 10)).toString();
+        imageId += Math.floor(Math.random() * 10).toString();
     }
     var link = document.createElement('a');
     link.href = canvas.toDataURL();
